@@ -56,7 +56,7 @@ require ('database.php');
                             color: <?=( ( strtotime($taak['plan']) > strtotime($klok[$taak['id']]['totaalGeklokt']) ) ? 'green' : 'red') ?>" data-dezeSessie=""                                             class="alleDo do<?=$taak['id']?>"><?=(empty($klok[$taak['id']]['totaalGeklokt']) ? "00:00:00" : $klok[$taak['id']]['totaalGeklokt'])?></td>
                             <td><i data-status="uitgeklokt" data-value="<?=$taak['id']?>" class="material-icons timerIcon">timer_off</i></td>
                             <td><label data-taak_id="<?=$taak['id']?>"  class="btn btn-danger deleteTask">Delete Task</label></td>
-                            <?php echo '<pre>'; print_r ($total[$taak['id']]['totaalGeklokt']  ); echo '</pre>'; ?>
+<!--                            --><?php //echo '<pre>'; print_r ($total[$taak['id']]['totaalGeklokt']  ); echo '</pre>'; ?>
                         </tr>
         <?php } ?>
         </tbody>

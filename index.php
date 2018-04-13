@@ -38,9 +38,9 @@ require ('database.php');
 
     <table class="table">
         <form action="project.php">
-
+            <button type="submit" name="sturen" class="btn btn-success">Add Project</button>
         </form>
-        <button type="submit" name="sturen" class="nice btn btn-success">Add Project</button>
+
 
         <thead>
         <tr>
@@ -59,7 +59,7 @@ require ('database.php');
         <body>
         <?php
         if (empty($projecten)){
-            echo '<script> alert( "Er is geen project gevonden" ); </script>';
+            echo '<script> alert( "Er zijn geen project gevonden" ); </script>';
         }
         else
         {
