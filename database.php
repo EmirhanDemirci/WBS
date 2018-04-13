@@ -18,7 +18,7 @@ $conn = new mysqli($servername, $username, $password,$database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
+// hafiz heeft ons hiermee geholpen
 function schoonmaakAssistent($value){
     $data = htmlentities($value, ENT_QUOTES); // "A 'quote' is <b>bold</b>" Outputs: A &#039;quote&#039; is &lt;b&gt;bold&lt;/b&gt;
     return $data;

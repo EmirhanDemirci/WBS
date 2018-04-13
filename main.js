@@ -1,3 +1,5 @@
+// hafiz heeft ons hiermee geholpen
+
 function schoonmaakPloeg(value){
     var schoneValue =  value.replace(/[.,|<>?;:'"\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     if (schoneValue == ""){
