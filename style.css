@@ -1,3 +1,21 @@
 .active {
     color: lightgreen;
 }
+.jumbotron {
+    padding-top: 30px!important;
+    padding-bottom: 30px;
+    margin-bottom: 30px!important;
+    color: white!important;
+    background-color: #1e0101!important;
+}
+.form-control
+{
+    width: 1200px;
+    margin: 6px;
+}
+#submit2
+{
+margin-left: 390px;
+    height: 45px;
+
+}

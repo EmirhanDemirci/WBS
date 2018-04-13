@@ -116,7 +116,7 @@ if (isset($_POST['ajax']) && $_POST['status'] == "verwijderTask"){
 
 
 if (isset($_GET['project_id']) && empty($tasks) && $_SERVER['SCRIPT_NAME'] !== "/wbs/task.php" ){
-   die("Er is geen project gevonden" );
+   die("Er zijn geen taken gevonden" );
 }
 
 

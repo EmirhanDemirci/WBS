@@ -23,6 +23,7 @@ require ('database.php');
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <div class="jumbotron">
@@ -33,20 +34,20 @@ require ('database.php');
 </div>
 
 
-<input data-project_id="<?=$_GET['project_id']?>" id="taskname" type="text"  placeholder="Task Name" /> <br/>
-<input data-project_id="<?=$_GET['project_id']?>" id="predecessor" type="text"  placeholder="Predecessor" /> <br/>
-<input data-project_id="<?=$_GET['project_id']?>" id="developer" type="text"  placeholder="Developer" /> <br/>
-<select id="moscow">
+<input class="col-md-3 col-md-offset-4 form-control" data-project_id="<?=$_GET['project_id']?>" id="taskname" type="text"  placeholder="Task Name" /> <br/>
+<input class="col-md-3 col-md-offset-4 form-control" data-project_id="<?=$_GET['project_id']?>" id="predecessor" type="text"  placeholder="Predecessor" /> <br/>
+<input class="col-md-3 col-md-offset-4 form-control" data-project_id="<?=$_GET['project_id']?>" id="developer" type="text"  placeholder="Developer" /> <br/>
+<select class="col-md-3 col-md-offset-4 form-control" id="moscow">
     <option value="must">Must</option>
     <option value="should">Should</option>
     <option value="could">Could</option>
     <option value="wont">Wont</option>
 </select> <br/>
-<input data-project_id="<?=$_GET['project_id']?>" id="plan" type="text" placeholder="Plan" required /> <br/>
-<textarea data-project_id="<?=$_GET['project_id']?>" id="check" type="text" >Check</textarea> <br/>
-<textarea data-project_id="<?=$_GET['project_id']?>" id="act" type="text"   >Act</textarea>
-<br>
-<label  id="submit2" class="btn btn-info" >Submit</label>
+<input class="col-md-3 col-md-offset-4 form-control" data-project_id="<?=$_GET['project_id']?>" id="plan" type="text" placeholder="Plan" required /> <br/>
+<input class="col-md-3 col-md-offset-4 form-control" data-project_id="<?=$_GET['project_id']?>" id="check" type="text" placeholder="Check"></input> <br/>
+<input class="col-md-3 col-md-offset-4 form-control"  data-project_id="<?=$_GET['project_id']?>" id="act" type="text" placeholder="Act"></input>
+
+<label  id="submit2" class="col-md-2 col-md-offset-4 btn btn-primary btn-info" >Submit</label>
 </body>
 <script type="text/javascript" src="main.js"></script>
 </html>
