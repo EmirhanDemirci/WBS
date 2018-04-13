@@ -6,6 +6,15 @@ function schoonmaakPloeg(value){
     return schoneValue;
 }
 
+function HMSToSeconds(hms){
+    var a = hms.split(':'); // split it at the colons
+    var secondsDo = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+    return secondsDo;
+}
+
+function secondsToHMS(seconds){
+   return new Date(1000 * seconds).toISOString().substr(11, 8);
+}
 
 
 $('#submit').click(function(){
@@ -50,21 +59,16 @@ $('.deleteProject').click(function () {
     $.post("database.php", {ajax: 1, status: "verwijderProject", project_id: project_id });
 
 });
+$('.deleteTask').click(function () {
+    var taak_id = $(this).attr('data-taak_id');
+    $('#row'+taak_id).remove();
+    console.log(taak_id);
+    $.post("database.php", {ajax: 1, status: "verwijderTask", taak_id: taak_id });
+});
 
 
 
 
-
-function HMSToSeconds(hms){
-    var a = hms.split(':'); // split it at the colons
-    var secondsDo = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
-    return secondsDo;
-}
-
-function secondsToHMS(seconds){
-    var time = new Date(1000 * seconds).toISOString().substr(11, 8);
-    return time;
-}
 
 $('.timerIcon').click(function inklokken() {
 
@@ -80,6 +84,7 @@ $('.timerIcon').click(function inklokken() {
         var hmsDo = $('.sumDo').text()
         var aDo = hmsDo.split(':'); // split it at the colons
         var secondsTotaalDo = (+aDo[0]) * 60 * 60 + (+aDo[1]) * 60 + (+aDo[2]);
+        var alleTimeGeklokt = 0;
 
         function tictac(){ // teller van tijd
             sec++;
@@ -114,6 +119,15 @@ $('.timerIcon').click(function inklokken() {
             if (HMSToSeconds($('.sumDo').text()) >  HMSToSeconds($('.sumPlan').text())){
                 $('.sumDo').css('color', 'red');
             }
+
+
+            $('.alleDo').each(function(){
+                var ballonPlan = HMSToSeconds($(this).text());
+                alleTimeGeklokt += ballonPlan;
+            });
+
+            $('#project_id').text(secondsToHMS(alleTimeGeklokt));
+
         }
 
         timer = setInterval(tictac, 1000);
@@ -129,15 +143,16 @@ $('.timerIcon').click(function inklokken() {
     if($(this).attr('data-status') == 'ingeklokt' && klokToestaan == true){
         sec = 0;
         clearInterval(timer);
-        $.post( "database.php", { ajax: 1, status: "klokken", taak_id: opdracht_id, tijd:  $('.do'+opdracht_id).attr('data-dezeSessie') } );
+        $.post( "database.php", { ajax: 1, status: "klokken", taak_id: opdracht_id, tijd:  $('.do'+opdracht_id).attr            ('data-dezeSessie') } );
         $(this).attr('data-status', 'uitgeklokt');
         $(this).text("timer_off");
         $('.row'+opdracht_id).removeClass('active');
         klokToestaan = false;
         var project_id = $(this).attr('data-project_id');
-/*        $.post( "database.php, { ajax: 1, status: "showKlok", id: opdracht_id } ).done(function(data){
+        $.post( "database.php", { ajax: 1, status: 'showKlok', opdracht_id: opdracht_id } ).done(function(data){
             $('.do'+opdracht_id).html(data);
-        });*/
+            console.log(data);
+        });
     }
 })
 
@@ -153,3 +168,6 @@ $(document).keydown(function (event) {
 $(document).on("contextmenu", function (e) {
     e.preventDefault();
 });*/
+
+
+

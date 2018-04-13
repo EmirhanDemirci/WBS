@@ -80,6 +80,7 @@ if (isset($_GET['project_id'])){
 
 
 
+
 if (isset($_POST['ajax']) && $_POST['status'] == "verwijderProject"){
 
     if ($taken[$_POST['project_id']]['aantalTaken'] > 0) {
@@ -89,6 +90,13 @@ if (isset($_POST['ajax']) && $_POST['status'] == "verwijderProject"){
     {
         $conn->query(" DELETE FROM projecten WHERE project_id = {$_POST['project_id']} ");
     }
+
+}
+
+if (isset($_POST['ajax']) && $_POST['status'] == "verwijderTask"){
+
+        $conn->query(" DELETE FROM taken WHERE id = {$_POST['taak_id']} ");
+
 
 }
 
@@ -116,3 +124,52 @@ if (isset($_GET['project_id']) && empty($tasks) && $_SERVER['SCRIPT_NAME'] !== "
 if (isset($_POST['ajax']) && $_POST['status'] == "klokken"){
         $conn->query(" INSERT INTO klok VALUES (NULL, '{$_POST['tijd']}', {$_POST['taak_id']}) ");
 }
+
+
+if ($resource = mysqli_query($conn,"      SELECT 
+                                                 taken.id as `taak_id`, 
+                                                  SEC_TO_TIME( ROUND( SUM( TIME_TO_SEC(klok.tijd)) ) ) as `totaalGeklokt`
+                                                 FROM taken
+                                                 INNER JOIN klok
+                                                 ON taken.id = klok.taak_id
+                                                 GROUP BY taken.id 
+                                                 "))
+{
+    while($result = mysqli_fetch_assoc($resource))
+    {
+        $klok[$result['taak_id']] = $result;
+    }
+}
+else
+{
+    echo "There is a problem:"; // Message says that there is a problem.
+    die(mysqli_error($conn)); // Shows the $connect variable.
+}
+
+
+if ($resource2 = mysqli_query($conn,"      SELECT 
+                                                 taken.id as `taak_id`, 
+                                                  ( ROUND( SUM( TIME_TO_SEC(klok.tijd)) ) ) as `totaalGeklokt`
+                                                 FROM taken 
+                                                 INNER JOIN klok
+                                                 ON taken.id = klok.taak_id
+                                                 GROUP BY taken.id 
+                                                 "))
+{
+    while($result = mysqli_fetch_assoc($resource2))
+    {
+        $total[$result['taak_id']] = $result;
+    }
+}
+else
+{
+    echo "There is a problem:"; // Message says that there is a problem.
+    die(mysqli_error($conn)); // Shows the $connect variable.
+}
+
+if (isset($_POST['ajax']) && $_POST['status'] == "showKlok"){
+    $id = $_POST['opdracht_id'];
+    echo $klok[$id]['totaalGeklokt'];
+
+}
+

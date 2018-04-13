@@ -42,7 +42,7 @@ require ('database.php');
     <option value="could">Could</option>
     <option value="wont">Wont</option>
 </select> <br/>
-<input data-project_id="<?=$_GET['project_id']?>" id="plan" type="text" placeholder="Plan" /> <br/>
+<input data-project_id="<?=$_GET['project_id']?>" id="plan" type="text" placeholder="Plan" required /> <br/>
 <textarea data-project_id="<?=$_GET['project_id']?>" id="check" type="text" >Check</textarea> <br/>
 <textarea data-project_id="<?=$_GET['project_id']?>" id="act" type="text"   >Act</textarea>
 <br>
