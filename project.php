@@ -23,9 +23,11 @@ require ('database.php');
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <div class="jumbotron">
+
     <div class="container">
         <h1>WBS monitor</h1>
 
@@ -35,7 +37,7 @@ require ('database.php');
 
     Project Name:<br>
     <input id="firstname" type="text" name="firstname" placeholder="Project Name" />
-<label  id="submit" >Submit</label>
+<label  id="submit" class="btn btn-info" >Submit</label>
 </body>
 <script type="text/javascript" src="main.js"></script>
 

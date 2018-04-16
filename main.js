@@ -1,3 +1,5 @@
+// hafiz heeft ons hiermee geholpen
+
 function schoonmaakPloeg(value){
     var schoneValue =  value.replace(/[.,|<>?;:'"\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     if (schoneValue == ""){
@@ -19,12 +21,13 @@ function secondsToHMS(seconds){
 
 $('#submit').click(function(){
     if ($('#firstname').val() == ""){
-       alert("je firstname is leeg");
+       alert("je Project Name is leeg");
+
     }
     else
     {
         $.post("database.php", {ajax: 1, status: "verstuurProject", firstname: $('#firstname').val()});
-        alert("Het verstuurde data = " + $('#firstname').val());
+        alert("je hebt een project gemaakt genaamd = " + $('#firstname').val());
         $('#firstname').val("");
     }
 
@@ -46,13 +49,14 @@ $('#submit2').click(function(){
         }).done(function (chocolade) {
           console.dir(chocolade);
         });
-            alert("Het verstuurde data = " + $('#taskname').val() );
+            alert("Je hebt een taskname gemaakt genaamd = " + $('#taskname').val() );
         $('#taskname').val("");
     }
 
 });
 
 $('.deleteProject').click(function () {
+    bootbox.alert("User Deleted the Project!");
     var project_id = $(this).attr('data-project_id');
     $('#row'+project_id).remove();
     console.log(project_id);
@@ -123,10 +127,13 @@ $('.timerIcon').click(function inklokken() {
 
             $('.alleDo').each(function(){
                 var ballonPlan = HMSToSeconds($(this).text());
-                alleTimeGeklokt += ballonPlan;
+               alleTimeGeklokt += ballonPlan;
+
+
             });
 
-            $('#project_id').text(secondsToHMS(alleTimeGeklokt));
+            $('#project_id').text(secondsToHMS(alleTimeGeklokt += ballonPlan));
+
 
         }
 

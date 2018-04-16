@@ -18,7 +18,7 @@ $conn = new mysqli($servername, $username, $password,$database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
+// hafiz heeft ons hiermee geholpen
 function schoonmaakAssistent($value){
     $data = htmlentities($value, ENT_QUOTES); // "A 'quote' is <b>bold</b>" Outputs: A &#039;quote&#039; is &lt;b&gt;bold&lt;/b&gt;
     return $data;
@@ -116,7 +116,7 @@ if (isset($_POST['ajax']) && $_POST['status'] == "verwijderTask"){
 
 
 if (isset($_GET['project_id']) && empty($tasks) && $_SERVER['SCRIPT_NAME'] !== "/wbs/task.php" ){
-   die("Er is geen project gevonden" );
+   die("Er zijn geen taken gevonden" );
 }
 
 
