@@ -170,6 +170,5 @@ else
 if (isset($_POST['ajax']) && $_POST['status'] == "showKlok"){
     $id = $_POST['opdracht_id'];
     echo $klok[$id]['totaalGeklokt'];
-
 }
 

@@ -51,15 +51,20 @@ require ('database.php');
                         <tr id="row<?=$taak['id']?>">
                             <td><?=$taak['id']?></td>
                             <td><?=$taak['taken']?></td>
-                            <td class="plan<?=$taak['id']?>"><?=$taak['plan']?></td>
+                            <td class="allePlan plan<?=$taak['id']?>"><?=$taak['plan']?></td>
                             <td style="
-                            color: <?=( ( strtotime($taak['plan']) > strtotime($klok[$taak['id']]['totaalGeklokt']) ) ? 'green' : 'red') ?>" data-dezeSessie=""                                             class="alleDo do<?=$taak['id']?>"><?=(empty($klok[$taak['id']]['totaalGeklokt']) ? "00:00:00" : $klok[$taak['id']]['totaalGeklokt'])?></td>
+                            color: <?=( ( strtotime($taak['plan']) > strtotime($klok[$taak['id']]['totaalGeklokt']) ) ? 'green' : 'red') ?>"  class="alleDo do<?=$taak['id']?>"><?=$klok[$taak['id']]['totaalGeklokt']?></td>
                             <td><i data-status="uitgeklokt" data-value="<?=$taak['id']?>" class="material-icons timerIcon">timer_off</i></td>
                             <td><label data-taak_id="<?=$taak['id']?>"  class="btn btn-danger deleteTask">Delete Task</label></td>
 <!--                            --><?php //echo '<pre>'; print_r ($total[$taak['id']]['totaalGeklokt']  ); echo '</pre>'; ?>
                         </tr>
         <?php } ?>
         </tbody>
+        <tr>
+            <td colspan="2">total</td>
+            <td class="sumPlan">00:00:00</td>
+            <td class="sumDo">00:00:00</td>
+        </tr>
     </table>
 </body>
 <script type="text/javascript" src="main.js"></script>

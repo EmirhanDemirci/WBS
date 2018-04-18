@@ -1,11 +1,9 @@
 // hafiz heeft ons hiermee geholpen
 
-function schoonmaakPloeg(value){
-    var schoneValue =  value.replace(/[.,|<>?;:'"\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-    if (schoneValue == ""){
-        schoneValue = "UNKNOWN TXT";
-    }
-    return schoneValue;
+/*
+function secondsToHMS(seconds){
+    var time = new Date(1000 * seconds).toISOString().substr(11, 8);
+    return time;
 }
 
 function HMSToSeconds(hms){
@@ -13,9 +11,14 @@ function HMSToSeconds(hms){
     var secondsDo = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
     return secondsDo;
 }
+*/
 
-function secondsToHMS(seconds){
-   return new Date(1000 * seconds).toISOString().substr(11, 8);
+function schoonmaakPloeg(value){
+    var schoneValue =  value.replace(/[.,|<>?;:'"/#!$%^&*;:{}=-_`~]/g,"");
+    if (schoneValue == ""){
+        schoneValue = "UNKNOWN TXT";
+    }
+    return schoneValue;
 }
 
 
@@ -81,60 +84,57 @@ $('.timerIcon').click(function inklokken() {
     var klokToestaan = true;
 
     if($(this).attr('data-status') == 'uitgeklokt' && klokToestaan == true){
-        var hms = $('.do'+opdracht_id).text();
-        var a = hms.split(':'); // split it at the colons
-        var secondsDo = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
-
-        var hmsDo = $('.sumDo').text()
-        var aDo = hmsDo.split(':'); // split it at the colons
-        var secondsTotaalDo = (+aDo[0]) * 60 * 60 + (+aDo[1]) * 60 + (+aDo[2]);
+        var haha = $('.do'+opdracht_id).text();
+        var aDoodo = haha.split(':'); // split it at the colons
+        var secondsDo = ( (+aDoodo[0]) * 60 * 60) + ( (+aDoodo[1]) * 60 + (+aDoodo[2]) );
+        var aDo = $('.sumDo').text().split(':'); // split it at the colons
+        var secondsTotaalDo = ( (+aDo[0]) * 60 * 60) + ( (+aDo[1]) * 60 + (+aDo[2]) );
         var alleTimeGeklokt = 0;
 
         function tictac(){ // teller van tijd
             sec++;
+            var secondsDo = 0;
+            var eeee =  new Date(1000 * (secondsDo + sec) ).toISOString().substr(11, 8);
+            $('.do'+opdracht_id).html(eeee); // HH:MM:SS gaat in div #tijd
+            var secondene =  new Date(1000 * sec ).toISOString().substr(11, 8);
+            $('.do'+opdracht_id).attr('data-dezeSessie', secondene );
+            var ee =  new Date(1000 * (secondsTotaalDo + sec) ).toISOString().substr(11, 8);
+            $('.sumDo').html(ee);
+            var x = $('.sumDo').text().split(':'); // split it at the colons
+            var secondsDo = (+x[0]) * 60 * 60 + (+x[1]) * 60 + (+x[2]);
+            var y = $('.sumPlan').text().split(':'); // split it at the colons
+            var secondsDo = (+y[0]) * 60 * 60 + (+y[1]) * 60 + (+y[2]);
 
-
-
-/*
-            var planned =  new Date(1000 * ($('.plan'+opdracht_id).text()) ).toISOString().substr(11, 8);
-
-
-            if (secondsDo + sec > planned )
-            {
-                $('.do'+opdracht_id).css('color', 'red');
-            }
-            else
-            {
-                $('.do'+opdracht_id).css('color', 'green');
-            }
-*/
-
-            //var bijelkaar =  new Date(1000 * (secondsDo + sec) ).toISOString().substr(11, 8);
-            $('.do'+opdracht_id).html(secondsToHMS(secondsDo + sec)); // HH:MM:SS gaat in div #tijd
-
-            //var seconden =  new Date(1000 * sec ).toISOString().substr(11, 8);
-            $('.do'+opdracht_id).attr('data-dezeSessie', secondsToHMS(sec) );
-
-            //var totaaldosec =  new Date(1000 * (secondsTotaalDo + sec) ).toISOString().substr(11, 8);
-
-            $('.sumDo').html(secondsToHMS(secondsTotaalDo + sec));
-
-
-            if (HMSToSeconds($('.sumDo').text()) >  HMSToSeconds($('.sumPlan').text())){
+            if (x >  y){
                 $('.sumDo').css('color', 'red');
             }
 
-
-            $('.alleDo').each(function(){
-                var ballonPlan = HMSToSeconds($(this).text());
-               alleTimeGeklokt += ballonPlan;
-
+            var bijelkaarPlan = 0;
+            var sumPlan = [];
+            $( ".allePlan" ).each(function( index ) {
+                var bbbbbb = $(this).text().split(':'); // split it at the colons
+                var secondsplannn = (+bbbbbb[0]) * 60 * 60 + (+bbbbbb[1]) * 60 + (+bbbbbb[2]);
+                sumPlan[index] = secondsplannn;
 
             });
-
-            $('#project_id').text(secondsToHMS(alleTimeGeklokt += ballonPlan));
-
-
+            for (var i = 0; i < sumPlan.length; i++){
+                bijelkaarPlan += sumPlan[i];
+            }
+            var sexy = new Date(1000 * bijelkaarPlan).toISOString().substr(11, 8);
+            $('.sumPlan').html(sexy);
+////////////////////////TOTAAL_DO///////////////////////////////////////////////////////////////////////////////////////
+            var bijelkaarDo = 0;
+            var sumDo = [];
+            $( ".alleDo" ).each(function( index ) {
+                var b = $(this).text().split(':'); // split it at the colons
+                var dddd = (+b[0]) * 60 * 60 + (+b[1]) * 60 + (+b[2]);
+                sumDo[index] = dddd;
+            });
+            for (var i = 0; i < sumDo.length; i++){
+                bijelkaarDo += sumDo[i];
+            }
+            var poo = new Date(1000 * bijelkaarDo).toISOString().substr(11, 8);
+            $('.sumDo').html(poo);
         }
 
         timer = setInterval(tictac, 1000);
@@ -142,15 +142,13 @@ $('.timerIcon').click(function inklokken() {
         $(this).attr('data-status', 'ingeklokt');
         $(this).text("timer_on");
         $('.row'+opdracht_id).addClass('active');
-
-
         klokToestaan = false;
     }
 
     if($(this).attr('data-status') == 'ingeklokt' && klokToestaan == true){
         sec = 0;
         clearInterval(timer);
-        $.post( "database.php", { ajax: 1, status: "klokken", taak_id: opdracht_id, tijd:  $('.do'+opdracht_id).attr            ('data-dezeSessie') } );
+        $.post( "database.php", { ajax: 1, status: "klokken", taak_id: opdracht_id, tijd:  $('.do'+opdracht_id).attr('data-dezeSessie') } );
         $(this).attr('data-status', 'uitgeklokt');
         $(this).text("timer_off");
         $('.row'+opdracht_id).removeClass('active');
